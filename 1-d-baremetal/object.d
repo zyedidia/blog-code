@@ -42,8 +42,7 @@ void print(Args...)(Args args) {
 }
 
 void println(Args...)(Args args) {
-    print(args);
-    print('\n');
+    print(args, '\n');
 }
 
 size_t strlen(const(char)* s) {
