@@ -2,9 +2,9 @@ SRC=$(wildcard *.d)
 OBJ=$(SRC:.d=.o)
 
 %.o: %.d
-	ldc2 -Oz -betterC -mtriple=riscv64-unknown-elf -mattr=+m,+a,+c --code-model=medium $< -c -of $@
+	ldc2 -Oz -betterC -mtriple=riscv64-unknown-elf -mattr=+m,+a,+c,+relax --code-model=medium $< -c -of $@
 %.o: %.s
-	riscv64-unknown-elf-as -mno-relax -march=rv64imac $< -c -o $@
+	riscv64-unknown-elf-as -march=rv64imac $< -c -o $@
 prog.elf: start.o $(OBJ)
 	riscv64-unknown-elf-ld -Tlink.ld $^ -o $@
 %.bin: %.elf

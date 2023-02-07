@@ -8,6 +8,7 @@ SECTIONS
     }
     .rodata : {
         . = ALIGN(8);
+        __global_pointer$ = . + 0x800;
         *(.rodata*)
         *(.srodata*)
     }

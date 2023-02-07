@@ -1,7 +1,12 @@
 module main;
 
 void kmain() {
-    char[10] array;
-    int x = 12;
-    println(array[x]);
+    println("Hello world!");
+
+    // Cause a bounds-check failure
+    static if (false) {
+        char[10] array;
+        int x = 12;
+        println(array[x]);
+    }
 }
