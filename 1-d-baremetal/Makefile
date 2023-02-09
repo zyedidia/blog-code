@@ -16,6 +16,6 @@ prog.elf: start.o $(OBJ)
 run: prog.bin
 	qemu-system-riscv64 -nographic -bios none -machine virt -kernel prog.bin
 clean:
-	rm -f *.bin *.list *.o *.elf
+	rm -f *.bin *.list *.o *.elf *.dep
 
 -include *.dep
