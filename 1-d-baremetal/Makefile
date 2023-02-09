@@ -1,8 +1,10 @@
 SRC=$(wildcard *.d)
 OBJ=$(SRC:.d=.o)
 
+all: prog.bin
+
 %.o: %.d
-	ldc2 -Oz -betterC -mtriple=riscv64-unknown-elf -mattr=+m,+a,+c,+relax --code-model=medium $< -c -of $@
+	ldc2 -Oz -betterC -mtriple=riscv64-unknown-elf -mattr=+m,+a,+c,+relax --code-model=medium --makedeps=$*.dep $< -c -of $@
 %.o: %.s
 	riscv64-unknown-elf-as -march=rv64imac $< -c -o $@
 prog.elf: start.o $(OBJ)
@@ -15,3 +17,5 @@ run: prog.bin
 	qemu-system-riscv64 -nographic -bios none -machine virt -kernel prog.bin
 clean:
 	rm -f *.bin *.list *.o *.elf
+
+-include *.dep
