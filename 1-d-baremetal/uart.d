@@ -1,5 +1,7 @@
 module uart;
 
+import core.volatile;
+
 struct Ns16650a(ubyte* base) {
     static void tx(ubyte b) {
         volatileStore(base, b);
