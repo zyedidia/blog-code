@@ -17,8 +17,6 @@ prog.elf: start.o $(OBJ)
 	vf2-imager -i $< -o $@
 flash: prog.img
 	vf2 $<
-run: prog.bin
-	qemu-system-riscv64 -nographic -bios none -machine virt -kernel prog.bin
 clean:
 	rm -f *.bin *.list *.o *.elf *.dep *.img
 
