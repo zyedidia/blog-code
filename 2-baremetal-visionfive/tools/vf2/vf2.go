@@ -24,6 +24,7 @@ func exists(f string) bool {
 }
 
 var baud = flag.Uint("baud", 115200, "baud rate")
+var file = flag.String("f", "/dev/ttyUSB0", "UART device file")
 
 var autodetect = []string{
 	"/dev/ttyACM0",
@@ -32,6 +33,14 @@ var autodetect = []string{
 }
 
 func main() {
+	flag.Parse()
+	args := flag.Args()
+	if len(args) <= 0 {
+		log.Fatal("no firmware file given")
+	}
+	fw := args[0]
+
+	autodetect = append(autodetect, *file)
 
 	var file string
 	for _, f := range autodetect {
@@ -43,13 +52,6 @@ func main() {
 	if file == "" {
 		log.Fatal("could not autodetect serial port")
 	}
-
-	flag.Parse()
-	args := flag.Args()
-	if len(args) <= 0 {
-		log.Fatal("no firmware file given")
-	}
-	fw := args[0]
 
 	options := serial.OpenOptions{
 		PortName:        file,
