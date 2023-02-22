@@ -5,3 +5,4 @@
 *.bin
 *.dep
 *.img
+!jh7110-recovery.bin
