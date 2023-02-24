@@ -5,7 +5,7 @@ struct Timer {
         return volatileLoad(cast(ulong*) (0x200_0000 + 0xBFF8));
     }
 
-    enum mtime_freq = 4_800_000;
+    enum mtime_freq = 4_000_000;
 
     static void delay_time(ulong t) {
         ulong rb = mtime;
