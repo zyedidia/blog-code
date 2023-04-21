@@ -1,0 +1,15 @@
+knit = require("knit")
+
+local src = knit.rglob(".", "*.d")
+local obj = knit.extrepl(src, ".d", ".o")
+
+return b{
+    $ prog: $(obj)
+        gdc $input -o $output
+
+    $ %.di: %.d
+        gdc -fsyntax-only -Hf $output $input
+
+    $ %.o:D[%.dep]: %.d %.di[I]
+        gdc -MM -MF $dep -MT $output -c $input -o $output
+}
